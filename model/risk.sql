@@ -6,18 +6,18 @@ CREATE TABLE GAMES (
     id INTEGER PRIMARY KEY,
     started TEXT NOT NULL,
     ended TEXT
-)
+);
 
 CREATE TABLE MISSIONS (
     id INTEGER PRIMARY KEY,
     mission TEXT NOT NULL,
     criteria TEXT NOT NULL
-)
+);
 
 CREATE TABLE COLOURS (
     id INTEGER PRIMARY KEY,
     colour TEXT NOT NULL
-)
+);
 
 CREATE TABLE PLAYERS (
     name TEXT NOT NULL,
@@ -26,17 +26,17 @@ CREATE TABLE PLAYERS (
     colour_id INTEGER NOT NULL,
     has_dice INTEGER NOT NULL,
     game_data BLOB NOT NULL  -- hold data such as number of armies, cards, army placement, etc.
-)
+);
 
 CREATE TABLE CONTINENTS (
     id TEXT NOT NULL,
     name TEXT NOT NULL
-)
+);
 
 CREATE TABLE TERRITORIES (
     name TEXT NOT NULL,
     continent_id TEXT NOT NULL
-)
+);
 
 
 /*
@@ -50,7 +50,7 @@ VALUES
     ("green"),
     ("pink"),
     ("red"),
-    ("yellow")
+    ("yellow");
 
 /*
  * Load Mission Data.
@@ -71,7 +71,7 @@ VALUES
     ("Destroy all green armies or capture 24 territories.", "GREEN_24T")
     ("Destroy all pink armies or capture 24 territories.", "PINK_24T")
     ("Destroy all red armies or capture 24 territories.", "RED_24T")
-    ("Destroy all yellow armies or capture 24 territories.", "YELLOW_24T")
+    ("Destroy all yellow armies or capture 24 territories.", "YELLOW_24T");
 
 /*
  * Load Continents Data.
@@ -84,7 +84,7 @@ VALUES
     ("AU", "Australia"),
     ("EU", "Europe"),
     ("NA", "North America"),
-    ("SA", "South America")
+    ("SA", "South America");
 
  /*
   * Load Territories Data.
@@ -133,4 +133,4 @@ VALUES
     ("SA", "Argentina"),
     ("SA", "Brazil"),
     ("SA", "Peru"),
-    ("SA", "Venezuela"),
+    ("SA", "Venezuela");
