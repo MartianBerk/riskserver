@@ -59,18 +59,18 @@ VALUES
 INSERT INTO MISSIONS (mission, criteria)
 VALUES
     ("Capture Europe, Australia and one other continent.", "EU,AU,OTHER"),
-    ("Capture Europe, South America and one other continent.", "EU,SA,OTHER")
-    ("Capture North America and Africa.", "NA,AF")
-    ("Capture North America and Australia.", "NA,AU")
-    ("Capture Asia and South America.", "AS,SA")
-    ("Capture Asia and Africa.", "AS,AF")
-    ("Capture 24 territories.", "24T")
-    ("Capture 18 territories and occupy each with two troops.", "18T_2")
-    ("Destroy all black armies or capture 24 territories.", "BLACK_24T")
-    ("Destroy all blue armies or capture 24 territories.", "BLUE_24T")
-    ("Destroy all green armies or capture 24 territories.", "GREEN_24T")
-    ("Destroy all pink armies or capture 24 territories.", "PINK_24T")
-    ("Destroy all red armies or capture 24 territories.", "RED_24T")
+    ("Capture Europe, South America and one other continent.", "EU,SA,OTHER"),
+    ("Capture North America and Africa.", "NA,AF"),
+    ("Capture North America and Australia.", "NA,AU"),
+    ("Capture Asia and South America.", "AS,SA"),
+    ("Capture Asia and Africa.", "AS,AF"),
+    ("Capture 24 territories.", "24T"),
+    ("Capture 18 territories and occupy each with two troops.", "18T_2"),
+    ("Destroy all black armies or capture 24 territories.", "BLACK_24T"),
+    ("Destroy all blue armies or capture 24 territories.", "BLUE_24T"),
+    ("Destroy all green armies or capture 24 territories.", "GREEN_24T"),
+    ("Destroy all pink armies or capture 24 territories.", "PINK_24T"),
+    ("Destroy all red armies or capture 24 territories.", "RED_24T"),
     ("Destroy all yellow armies or capture 24 territories.", "YELLOW_24T");
 
 /*
