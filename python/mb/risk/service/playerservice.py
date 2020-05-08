@@ -17,7 +17,8 @@ class PlayerService:
 
         self._db = MyOdbc.connect(db_settings.get("driver"),
                                   self._db,
-                                  db_settings.get("location"))
+                                  db_settings.get("location"),
+                                  autocommit=False)
         self._game = game
 
     def add_player(self, name, colour, mission):
@@ -41,3 +42,7 @@ class PlayerService:
                                                                "cards": []}})
 
         return Player(**player)
+
+    def sync(self):
+        """Sync the latest game changes."""
+        self._db.commit()

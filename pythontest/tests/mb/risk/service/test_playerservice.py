@@ -36,7 +36,7 @@ class PlayerServiceTests(TestCase):
         service = PlayerService(mock_game)
         self.assertEqual(service._game, mock_game)
         self.assertEqual(service._db, self.mock_db.return_value)
-        self.mock_db.assert_called_with("mock_driver", "risk", "mock_location")
+        self.mock_db.assert_called_with("mock_driver", "risk", "mock_location", autocommit=False)
 
     @patch("mb.risk.service.playerservice.Player")
     def test_add_player(self, mock_player):
@@ -65,6 +65,10 @@ class PlayerServiceTests(TestCase):
                                                                "game_data": {"troops": 0,
                                                                              "territories": [],
                                                                              "cards": []}})
+
+    def test_sync(self):
+        PlayerService.sync(self.mock_self)
+        self.mock_db.commit.assert_called_once()
 
 
 if __name__ == "__main__":
