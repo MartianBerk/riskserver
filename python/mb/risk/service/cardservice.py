@@ -51,7 +51,11 @@ class CardService:
 
     @classmethod
     def deal(cls):
-        """Automatically load and shuffle the card decks."""
+        """Load and shuffle fresh card decks.
+
+        Returns:
+            CardService.
+        """
         db_settings = get_global("dbs", CardService._db)
 
         db = MyOdbc.connect(db_settings.get("driver"),
@@ -62,6 +66,35 @@ class CardService:
         territory_cards = CardService._load_territory_cards(db)
 
         service = CardService(mission_cards, territory_cards)
+        service.shuffle_deck("mission")
+        service.shuffle_deck("territory")
+
+        return service
+
+    @classmethod
+    def load(cls, mission_cards, territory_cards):
+        """Load and shuffle card decks, but remove cards in play.
+
+        Args:
+            mission_cards (list): List of MissionCard objects.
+            territory_cards (list): List of TerritoryCard objects.
+
+        Returns:
+            CardService.
+        """
+        db_settings = get_global("dbs", CardService._db)
+
+        db = MyOdbc.connect(db_settings.get("driver"),
+                            CardService._db,
+                            db_settings.get("location"))
+
+        new_mission_cards = CardService._load_mission_cards(db)
+        [new_mission_cards.remove(m) for m in mission_cards]
+
+        new_territory_cards = CardService._load_territory_cards(db)
+        [new_territory_cards.remove(t) for t in territory_cards]
+
+        service = CardService(new_mission_cards, new_territory_cards)
         service.shuffle_deck("mission")
         service.shuffle_deck("territory")
 

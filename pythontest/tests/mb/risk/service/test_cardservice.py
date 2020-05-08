@@ -64,6 +64,21 @@ class CardServiceTests(TestCase):
         self.assertListEqual([service.mission_card for _ in range(0, 3)], [1, 2, 3])
         self.assertListEqual([service.territory_card for _ in range(0, 3)], ["x", "y", "z"])
 
+    @patch("mb.risk.service.cardservice.random")
+    @patch("mb.risk.service.cardservice.CardService._load_territory_cards")
+    @patch("mb.risk.service.cardservice.CardService._load_mission_cards")
+    @patch("mb.risk.service.cardservice.MyOdbc")
+    @patch("mb.risk.service.cardservice.get_global")
+    def test_load(self, mock_global, mock_db, mock_mission_cards, mock_territory_cards, mock_random):
+        mock_random.shuffle.side_effect = lambda x: x  # ensure shuffle doesn't actually shuffle the lists
+        mock_global.return_value = {"driver": "mock_driver", "location": "mock_location"}
+        mock_mission_cards.return_value = [1, 2, 3]
+        mock_territory_cards.return_value = ["x", "y", "z"]
+
+        service = CardService.load([3], ["z"])
+        self.assertListEqual([service.mission_card for _ in range(0, 2)], [1, 2])
+        self.assertListEqual([service.territory_card for _ in range(0, 2)], ["x", "y"])
+
     def test_mission_card(self):
         # test one - no cards
         service = CardService(mission_cards=[], territory_cards=[])
