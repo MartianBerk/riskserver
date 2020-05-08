@@ -17,6 +17,10 @@ class RiskEngine:
 
         return game
 
+    def load_game(self, id):
+        """Load a saved game."""
+        pass
+
     def register_players(self, players):
         """Register players to a game.
 
