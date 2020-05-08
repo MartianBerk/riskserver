@@ -15,11 +15,9 @@ class CardServiceTests(TestCase):
         self.assertListEqual(CardService._load_mission_cards(mock_db),
                              [{"id": 1}, {"id": 2}])
 
-    @patch("mb.risk.service.cardservice.random")
     @patch("mb.risk.service.cardservice.TerritoryCard")
-    def test_load_territory_cards(self, mock_card, mock_random):
+    def test_load_territory_cards(self, mock_card):
         mock_card.side_effect = lambda **kwargs: kwargs
-        mock_random.shuffle.side_effect = lambda x: x  # ensure shuffle doesn't actually shuffle the lists
 
         mock_db = Mock()
         mock_db.get.return_value = [{"name": f"mock{i}"} for i in range(0, 42)]

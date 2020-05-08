@@ -3,7 +3,7 @@ import random
 from mylib.globals import get_global
 from mylib.myodbc import MyOdbc
 
-from mb.risk.model.cards import MissionCard, TerritoryCard
+from mb.risk.model import MissionCard, TerritoryCard
 
 
 class CardService:
@@ -28,7 +28,6 @@ class CardService:
     def _load_territory_cards(db):
         """Helper function to load territory cards from DB."""
         territories = [t["name"] for t in db.get("TERRITORIES")]
-        territories = random.shuffle(territories)
 
         # 30 infantry, 14 cavalry, 6 artillery & 2 wild (TODO: check amounts)
         infantry_cards = [TerritoryCard(territory=territories.pop(0), troop="infantry") for _ in range(0, 24)]
