@@ -43,6 +43,10 @@ class PlayerService:
 
         return Player(**player)
 
+    def list_players(self):
+        """List players in a game."""
+        return [Player(**p) for p in self._db.get("PLAYERS", where={"game_id": self._game.id})]
+
     def sync(self):
         """Sync the latest game changes."""
         self._db.commit()

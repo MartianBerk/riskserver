@@ -13,8 +13,12 @@ class PlayerServiceTests(TestCase):
         mock_db = Mock()
         mock_db.insert_get.side_effect = lambda *args: args[1]
 
+        mock_player = Mock()
+        mock_player.side_effect = lambda **kwargs: kwargs
+
         patches = {
-            "mb.risk.service.playerservice.MyOdbc.connect": mock_db
+            "mb.risk.service.playerservice.MyOdbc.connect": mock_db,
+            "mb.risk.service.playerservice.Player": mock_player
         }
 
         for p, d in patches.items():
@@ -38,10 +42,7 @@ class PlayerServiceTests(TestCase):
         self.assertEqual(service._db, self.mock_db.return_value)
         self.mock_db.assert_called_with("mock_driver", "risk", "mock_location", autocommit=False)
 
-    @patch("mb.risk.service.playerservice.Player")
-    def test_add_player(self, mock_player):
-        mock_player.side_effect = lambda **kwargs: kwargs
-
+    def test_add_player(self):
         mock_colour = Mock()
         type(mock_colour).id = 1
 
@@ -65,6 +66,13 @@ class PlayerServiceTests(TestCase):
                                                                "game_data": {"troops": 0,
                                                                              "territories": [],
                                                                              "cards": []}})
+
+    def test_list_players(self):
+        self.mock_db.get.return_value = [{"name": "player one"}, {"name": "player two"}]
+
+        players = PlayerService.list_players(self.mock_self)
+        self.assertListEqual(players, [{"name": "player one"}, {"name": "player two"}])
+        self.mock_db.get.assert_called_with("PLAYERS", where={"game_id": 1})
 
     def test_sync(self):
         PlayerService.sync(self.mock_self)
