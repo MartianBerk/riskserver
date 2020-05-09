@@ -11,7 +11,11 @@ class RiskEngine:
         self._game_service = GameService()
 
     def new_game(self):
-        """Launch new game."""
+        """Launch new game.
+
+        Returns:
+            Game.
+        """
         game = self._game_service.new_game()
         self._player_service = PlayerService(game)
 
@@ -22,18 +26,34 @@ class RiskEngine:
 
         Args:
             id (int): Game ID.
+
+        Returns:
+            tuple(Game, list(Player)).
         """
         game = self._game_service.load_game(id)
         self._player_service = PlayerService(game)
 
         # load other objects
+        players = self._player_service.list_players()
 
+        mission_cards = []
+        territory_cards = []
+        for p in players:
+            mission_cards.append(p.mission)
+            territory_cards.extend(p.cards)
+
+        self._card_service = CardService.load(mission_cards, territory_cards)
+
+        return game, players
 
     def register_players(self, players):
         """Register players to a game.
 
         Args:
             players (list): List of dictionaries containing player data.
+
+        Returns:
+            list(Player).
         """
         playing = []
 

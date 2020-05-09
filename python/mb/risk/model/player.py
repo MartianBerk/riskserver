@@ -63,7 +63,7 @@ class Player:
 
     @property
     def mission(self):
-        return self._mission.mission
+        return self._mission
 
     @property
     def colour(self):

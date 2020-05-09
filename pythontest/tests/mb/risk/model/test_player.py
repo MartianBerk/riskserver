@@ -53,7 +53,7 @@ class PlayerTests(TestCase):
 
         self.assertEqual(player.name, name)
         self.assertEqual(player.game, 1)
-        self.assertEqual(player.mission, "mock mission")
+        self.assertEqual(player.mission, mission)
         self.assertEqual(player.colour, "red")
         self.assertEqual(player.has_dice, False)
         self.assertEqual(player.cards, ["UK.infantry"])
