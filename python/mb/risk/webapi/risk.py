@@ -9,3 +9,8 @@ def new_game():
         return "Hello World"
     except KeyError as e:
         pass
+
+
+@route("/test")
+def test():
+    return "Test"
