@@ -1,3 +1,2 @@
 from mylib.webapi import app
-from mb.risk.webapi.risk import *
-# from .routes import *
+from .routes import *

@@ -22,6 +22,13 @@ class MissionCard:
         self._mission = mission
         self._criteria = criteria
 
+    def dict(self):
+        """Return a dict representing the MissionCard."""
+        return {
+            "id": self._id,
+            "mission": self._mission
+        }
+
     @property
     def id(self):
         return self._id

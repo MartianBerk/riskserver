@@ -15,6 +15,13 @@ class Colour:
         self._id = id
         self._colour = colour
 
+    def dict(self):
+        """Return a dictionary representing the Colour."""
+        return {
+            "id": self._id,
+            "colour": self._colour
+        }
+
     @property
     def id(self):
         return self._id

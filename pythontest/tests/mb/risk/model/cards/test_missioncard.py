@@ -22,6 +22,10 @@ class MissionCardTests(TestCase):
         self.assertEqual(card.mission, mock_mission)
         self.assertEqual(card.criteria, mock_criteria)
 
+    def test_dict(self):
+        mission = MissionCard(id=1, mission="mock mission", criteria="mock criteria")
+        self.assertDictEqual(mission.dict(), {"id": 1, "mission": "mock mission"})
+
 
 if __name__ == "__main__":
     main()
