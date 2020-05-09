@@ -11,6 +11,6 @@ def new_game():
         pass
 
 
-@route("/test")
+@route("/test", methods=["GET"])
 def test():
     return "Test"
