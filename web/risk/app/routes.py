@@ -1,6 +1,6 @@
 from contextlib import suppress
 
-from mylib.webapi import request, response, route
+from mylib.webapi import Session, request, response, route
 
 from mb.risk.engine import RiskEngine
 from mb.risk.model import Colour, MissionCard
@@ -8,11 +8,15 @@ from mb.risk.service.cardservice import CardService
 from mb.risk.service.colourservice import ColourService
 
 
+session = Session("risk")
+
+
 @route("/meta", methods=["GET"])
 def meta():
     # collect all mission cards
     missions = []
     card_service = CardService.deal()
+    session.cards = card_service
     while True:
         try:
             missions.append(card_service.mission_card.dict())
